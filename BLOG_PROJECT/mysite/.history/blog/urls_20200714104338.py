@@ -7,5 +7,5 @@ urlpatterns = [
     # home page will be the list of the post
     path('', views.PostListView.as_view(), name="post_list"),
     path('about/', views.AboutView.as_view(), name='about'),
-    path('detail/<int:pk>/', views.PostDetailView.as_view(), name='post_detail'),
+    path('detail/<int:pk>/', views.DetailView.as_view(), name='post_detail'),
 ]

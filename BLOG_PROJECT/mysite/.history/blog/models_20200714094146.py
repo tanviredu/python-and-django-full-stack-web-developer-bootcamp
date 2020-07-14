@@ -26,7 +26,6 @@ class Post(models.Model):
     # it actually shows when the work is finished
     # posted data then where do  you go
     # it goes to the post_detail page with the pk of the post
-    # you can do it to other place to
     def get_absolute_url(self):
         return reverse('post_detail', kwargs={'pk': self.pk})
 

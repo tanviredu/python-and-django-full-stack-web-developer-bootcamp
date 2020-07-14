@@ -22,14 +22,6 @@ class Post(models.Model):
         # in this case
         return self.comments.filter(approved_comment=True)
 
-    # this name is fixed
-    # it actually shows when the work is finished
-    # posted data then where do  you go
-    # it goes to the post_detail page with the pk of the post
-    # you can do it to other place to
-    def get_absolute_url(self):
-        return reverse('post_detail', kwargs={'pk': self.pk})
-
     def __str__(self):
         return self.title
 
@@ -45,11 +37,6 @@ class Comment(models.Model):
     def approve(self):
         self.approved_comment = True
         self.save()
-
-    # when the work finished go to the
-    # post list
-    def get_absolute_url(self):
-        return reverse('post_list')
 
     def __str__(self):
         return self.text

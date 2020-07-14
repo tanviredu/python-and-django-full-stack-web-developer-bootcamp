@@ -4,7 +4,7 @@ from .models import Post, Comment
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'author', 'created_date')
+    list_display = ('id', 'author', 'created_date')
     list_filter = ('author', 'created_date')
     search_fields = ('author', 'created_date')
     date_hierarchy = 'created_date'

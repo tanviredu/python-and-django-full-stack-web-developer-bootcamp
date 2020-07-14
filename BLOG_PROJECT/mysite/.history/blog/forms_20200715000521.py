@@ -1,6 +1,7 @@
 from django import forms
 from .models import Post, Comment
 from django.contrib.auth.models import User
+
 # for creating user form
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 

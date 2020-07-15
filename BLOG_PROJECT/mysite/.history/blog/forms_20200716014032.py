@@ -20,7 +20,7 @@ class PostForm(forms.ModelForm):
         fields = ('title', 'text')
 
         widgets = {
-            'text': forms.Textarea(attrs={'class': 'editable medium-editor-textarea', 'style': 'height:20px;'})
+            'text': forms.Textarea(attrs={'class': 'editable'})
         }
 
 

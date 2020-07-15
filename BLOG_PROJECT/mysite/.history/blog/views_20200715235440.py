@@ -1,12 +1,9 @@
 from .models import Post
-from django.shortcuts import render, HttpResponsePermanentRedirect
+from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import PostForm, CommentForm, MyRegistrationForm
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy, reverse
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 
 
 # to do
@@ -24,7 +21,7 @@ def sign_up(request):
     registered = False
     if request.method == "POST":
         # fill the form
-        form = MyRegistrationForm(data=request.POST)
+        form = MyRegistrationForm(request.POST)
         # validate
         if form.is_valid():
             form.save()
@@ -33,30 +30,6 @@ def sign_up(request):
     # when the page
     fdict = {'form': form, 'registered': registered}
     return render(request, 'registration/register.html', fdict)
-
-
-def login_user(request):
-    form = AuthenticationForm()
-    loggedin = False
-    if request.method == "POST":
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            print(user)
-            if user is not None:
-                login(request, user)
-                loggedin = True
-                return HttpResponsePermanentRedirect(reverse('blog:post_list'))
-
-    return render(request, 'registration/login.html', {'form': form})
-
-
-@login_required
-def logout_user(request):
-    logout(request)
-    return HttpResponsePermanentRedirect(reverse('blog:post_list'))
 
 
 class AboutView(TemplateView):

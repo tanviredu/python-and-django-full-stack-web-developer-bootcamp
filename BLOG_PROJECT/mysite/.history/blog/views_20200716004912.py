@@ -6,7 +6,6 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView,
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.decorators import login_required
 
 
 # to do
@@ -35,7 +34,7 @@ def sign_up(request):
     return render(request, 'registration/register.html', fdict)
 
 
-def login_user(request):
+def login(request):
     form = AuthenticationForm()
     loggedin = False
     if request.method == "POST":
@@ -51,12 +50,6 @@ def login_user(request):
                 return HttpResponsePermanentRedirect(reverse('blog:post_list'))
 
     return render(request, 'registration/login.html', {'form': form})
-
-
-@login_required
-def logout_user(request):
-    logout(request)
-    return HttpResponsePermanentRedirect(reverse('blog:post_list'))
 
 
 class AboutView(TemplateView):

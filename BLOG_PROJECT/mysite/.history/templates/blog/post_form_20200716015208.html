@@ -6,8 +6,14 @@
     {% csrf_token %} {{form|crispy}}
     <button type="submit" class="btn btn-danger btn-lg">Save</button>
   </form>
+
+  <script>
+    $(".editable").one("click", function () {
+      $(this).height(300).css({
+        cursor: "auto",
+      });
+    });
+    var editor = new MediumEditor(".editable");
+  </script>
 </div>
-<script>
-  tinymce.init({ selector: "textarea" });
-</script>
 {% endblock %}

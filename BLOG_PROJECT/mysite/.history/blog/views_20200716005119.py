@@ -35,7 +35,7 @@ def sign_up(request):
     return render(request, 'registration/register.html', fdict)
 
 
-def login_user(request):
+def login(request):
     form = AuthenticationForm()
     loggedin = False
     if request.method == "POST":

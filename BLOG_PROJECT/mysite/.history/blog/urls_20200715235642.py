@@ -13,6 +13,4 @@ urlpatterns = [
     path('drafts', views.DraftListView.as_view(), name='post_drafts_list'),
     path('delete/<int:pk>/', views.PostDeleteView.as_view(), name="post_remove"),
     path('register', views.sign_up, name='sign_up'),
-    path('login', views.login_user, name='login'),
-    path('logout', views.logout_user, name='logout_user'),
 ]

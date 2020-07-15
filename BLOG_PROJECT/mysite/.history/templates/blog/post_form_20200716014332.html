@@ -3,11 +3,12 @@
   <h1>New post</h1>
 
   <form method="POST" class="post-form">
-    {% csrf_token %} {{form|crispy}}
+    {% csrf_token %} {{form.as_p}}
     <button type="submit" class="btn btn-danger btn-lg">Save</button>
   </form>
+
+  <script>
+    var editor = new MediumEditor(".editable");
+  </script>
 </div>
-<script>
-  tinymce.init({ selector: "textarea" });
-</script>
 {% endblock %}

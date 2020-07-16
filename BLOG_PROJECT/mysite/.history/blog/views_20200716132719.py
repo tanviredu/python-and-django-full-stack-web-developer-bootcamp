@@ -1,4 +1,4 @@
-from .models import Post, Comment
+from .models import Post
 from django.shortcuts import render, HttpResponsePermanentRedirect, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import PostForm, CommentForm, MyRegistrationForm
@@ -115,17 +115,6 @@ def add_comment(request, pk):
     else:
         form = CommentForm()
     return render(request, 'blog/comment_form.html', {'form': form})
-
-
-@login_required
-def remove_comment(request, pk):
-    comment = get_object_or_404(Comment, pk=pk)
-    # before delete we need the associative post id so re can
-    # redirect to the same page
-    post_pk = comment.post.pk
-    # delete the comment
-    comment.delete()
-    return redirect('blog:post_detail', pk=post_pk)
 
 
 class AboutView(TemplateView):

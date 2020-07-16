@@ -15,7 +15,5 @@ urlpatterns = [
     path('register', views.sign_up, name='sign_up'),
     path('login', views.login_user, name='login'),
     path('logout', views.logout_user, name='logout_user'),
-    path('publish_post/<int:pk>', views.publish_post, name='publish_post'),
-    path('comment_form/<int:pk>', views.add_comment, name='add_comment'),
-    path('remove_comment/<int:pk>', views.remove_comment, name='remove_comment'),
+    path('publish_post', views.publish_post, name='publish_post')
 ]

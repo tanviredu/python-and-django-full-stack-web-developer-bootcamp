@@ -1,5 +1,5 @@
-from .models import Post, Comment
-from django.shortcuts import render, HttpResponsePermanentRedirect, get_object_or_404, redirect
+from .models import Post
+from django.shortcuts import render, HttpResponsePermanentRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import PostForm, CommentForm, MyRegistrationForm
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -66,66 +66,6 @@ def logout_user(request):
 # then add the comment method to add comment
 # and then button to remove the comment
 # thats it
-
-
-# adding decorator
-
-@login_required
-def publish_post(request, pk):
-    # fetch the post
-    post = get_object_or_404(Post, pk=pk)
-    # set the publish value
-    post.publish()
-    return HttpResponsePermanentRedirect(reverse('blog:post_list'))
-
-
-# @login_required
-# def add_comment_to_post(request, pk):
-#     post = get_object_or_404(Post, pk=pk)
-#     if request.method == "POST":
-#         form = CommentForm(request.POST)
-#         if form.is_valid():
-#             comment = form.save(commit=False)
-#             comment.post = post
-#             comment.save()
-#             return redirect('post_detail', pk=post.pk)
-#     else:
-#         form = CommentForm()
-#     return render(request, 'blog/comment_form.html', {'form': form})
-
-
-# adding comment
-# need to be logged in
-@login_required
-def add_comment(request, pk):
-    # get the post first
-    post = get_object_or_404(Post, pk=pk)
-
-    if request.method == "POST":
-        # fill the comment form
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            # adding the post reference to the comment
-            comment.post = post
-            comment.save()
-            return redirect('blog:post_detail', pk=post.pk)
-
-    # whent the page load
-    else:
-        form = CommentForm()
-    return render(request, 'blog/comment_form.html', {'form': form})
-
-
-@login_required
-def remove_comment(request, pk):
-    comment = get_object_or_404(Comment, pk=pk)
-    # before delete we need the associative post id so re can
-    # redirect to the same page
-    post_pk = comment.post.pk
-    # delete the comment
-    comment.delete()
-    return redirect('blog:post_detail', pk=post_pk)
 
 
 class AboutView(TemplateView):

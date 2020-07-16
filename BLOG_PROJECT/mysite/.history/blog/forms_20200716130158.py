@@ -19,6 +19,10 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ('title', 'text')
 
+        widgets = {
+            'text': forms.TextInput(attrs={'class': 'editable medium-editor-textarea', 'style': 'height:20px;'})
+        }
+
 
 class CommentForm(forms.ModelForm):
     class Meta:
